@@ -96,5 +96,28 @@ describe('dual client pool', function () {
         c.connect(socket.sideA);
     });
 
+    it('should send a connect event client connects', function (done) {
+        var c = clientpool(['robinhood']);
+        var clientroute;
+
+        c.mount(['connect', '**'], function (ctxt) {
+            clientroute = ctxt.to.slice(1);
+        });
+
+        c.mount(['identify'], function (ctxt) {
+            assert.deepEqual(ctxt.from, clientroute);
+            done();
+        });
+
+        var socket = io.socket();
+        socket.sideB.on('dual', function () {
+            socket.sideB.emit('dual', {
+                to: ['identify']
+                , from: []
+                , body: null
+            });
+        });
+        c.connect(socket.sideA);
+    });
 
 });
