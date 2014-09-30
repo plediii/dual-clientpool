@@ -15,6 +15,7 @@ module.exports = function (indexroute) {
                     c.send(['disconnect'].concat(clientRoute));
                 });
                 c.open(clientRoute, socket);
+                c.send(['connect'].concat(clientRoute), []);
                 c.send(clientRoute.concat('index'), indexroute);
             });
     };
