@@ -20,12 +20,11 @@
   },
   "homepage": "https://github.com/plediii/dual-clientpool.git",
   "dependencies": {
-    "dualapi": "git://github.com/plediii/dualapi.git#master",
-    "lodash": "^2.4.1",
     "uid-safe": "^1.0.1"
   },
   "devDependencies": {
-    "bluebird": "^2.3.2",
+    "lodash": "^2.4.1",
+    "dualapi": "^0.8.0",
     "gulp": "^3.8.8",
     "gulp-jshint": "^1.8.4",
     "jshint-stylish": "^1.0.0"

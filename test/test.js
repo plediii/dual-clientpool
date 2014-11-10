@@ -10,7 +10,7 @@ var io = require('./mock-io');
 describe('dual client pool', function () {
 
     it('should respond with index event when ready', function (done) {
-        var c = clientpool(['robinhood']);
+        var c = clientpool(dualapi(), ['robinhood']);
         var socket = io.socket();
         socket.sideB.on('dual', function (msg) {
             assert.deepEqual(msg.to, ['index']);
@@ -21,7 +21,7 @@ describe('dual client pool', function () {
     });
 
     it('should allow clients to send to mounted routes', function (done) {
-        var c = clientpool(['patience']);
+        var c = clientpool(dualapi(), ['patience']);
         c.mount(['dalek'], function (msg) {
             assert.equal(msg.from[0], 'client');
             assert.equal(msg.from[2], 'queen');
@@ -44,7 +44,7 @@ describe('dual client pool', function () {
 
     it('should give each client a unique id', function (done) {
         var clients = [];
-        var c = clientpool(['manage']);
+        var c = clientpool(dualapi(), ['manage']);
         c.mount(['amazing'], function (msg) {
             clients.push(msg.from[1]);
             if (clients.length > 1) {
@@ -76,7 +76,7 @@ describe('dual client pool', function () {
     });
 
     it('should send a disconnect message when client disconnects', function (done) {
-        var c = clientpool(['robinhood']);
+        var c = clientpool(dualapi(), ['robinhood']);
         var clientRoute;
         c.mount(['identify'], function (ctxt) {
             c.mount(['disconnect'].concat(ctxt.from), function (ctxt) {
@@ -97,7 +97,7 @@ describe('dual client pool', function () {
     });
 
     it('should send a connect event client connects', function (done) {
-        var c = clientpool(['robinhood']);
+        var c = clientpool(dualapi(), ['robinhood']);
         var clientroute;
 
         c.mount(['connect', '**'], function (ctxt) {
