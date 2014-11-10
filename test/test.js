@@ -4,7 +4,7 @@
 var dualapi = require('dualapi');
 var clientpool = require('../index');
 var assert = require('assert');
-var _ = require('underscore');
+var _ = require('lodash');
 var io = require('./mock-io');
 
 describe('dual client pool', function () {

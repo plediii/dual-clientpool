@@ -21,8 +21,8 @@
   "homepage": "https://github.com/plediii/dual-clientpool.git",
   "dependencies": {
     "dualapi": "git://github.com/plediii/dualapi.git#master",
-    "uid-safe": "^1.0.1",
-    "underscore": "^1.7.0"
+    "lodash": "^2.4.1",
+    "uid-safe": "^1.0.1"
   },
   "devDependencies": {
     "bluebird": "^2.3.2",
