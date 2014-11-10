@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/plediii/dual-clientpool.git",
   "dependencies": {
+    "bluebird": "^2.3.11",
     "uid-safe": "^1.0.1"
   },
   "devDependencies": {
