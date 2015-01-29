@@ -3,16 +3,17 @@
 
 var uid = require('uid-safe');
 
-module.exports = function (domain, indexroute) {
+module.exports = function (domain, indexroute, defaultFirewall) {
 
-    domain.connect = function (socket) {
+    domain.connect = function (socket, firewall) {
+        firewall = firewall || defaultFirewall;
         uid(24)
             .then(function (clientid) {
                 var clientRoute = ['client', clientid];
                 socket.on('disconnect', function () {
                     domain.send(['disconnect'].concat(clientRoute));
                 });
-                domain.open(clientRoute, socket);
+                domain.open(clientRoute, socket, firewall);
                 domain.send(['connect'].concat(clientRoute), []);
                 domain.send(clientRoute.concat('index'), indexroute);
             });

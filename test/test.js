@@ -42,6 +42,32 @@ describe('dual client pool', function () {
 
     });
 
+    it('should allow firewall to modify options', function (done) {
+        var c = clientpool(dualapi(), ['patience'], function (ctxt, cb) {
+            return cb(true, _.extend(ctxt.options, { quicksand: 'bench' }));
+        });
+        c.mount(['dalek'], function (msg) {
+            assert.equal(msg.options.quicksand, 'bench');
+            assert.equal(msg.options.perfectly, 'normal');
+            done();
+        });
+
+        var sendDual;
+        var socket = io.socket();
+        socket.sideB.on('dual', function () {
+            socket.sideB.emit('dual', {
+                to: ['dalek']
+                , from: ['queen']
+                , body: 'doctor'
+                , options: {
+                    perfectly: 'normal'
+                }
+            });
+        });
+        c.connect(socket.sideA);
+
+    });
+
     it('should give each client a unique id', function (done) {
         var clients = [];
         var c = clientpool(dualapi(), ['manage']);
