@@ -19,5 +19,13 @@ module.exports = function (domain, indexroute, defaultFirewall) {
             });
     };
 
+    domain.redirectClient = function (socket, where) {
+        socket.emit('dual', {
+            to: ['redirect']
+            , body: where
+        });
+        socket.disconnect();
+    };
+
     return domain;
 };
