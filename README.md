@@ -1,3 +1,5 @@
+DEPRECATED  Incompatible with dualapi 1.x.
+
 # Client pool for dualapi.
 
 Extends a dualapi domain with a multiplexer for `socket.io` connections.
